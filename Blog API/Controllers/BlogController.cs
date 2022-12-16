@@ -245,21 +245,21 @@ namespace Blog_API.Controllers
             return NoContent();
         }
 
-        //[HttpDelete("{slug}")]
-        //public async Task<ActionResult> DeleteBlog(string slug)
-        //{
-        //    if (!_blogRepository.BlogExists(slug)) return NotFound();
+        [HttpDelete("{slug}")]
+        public async Task<ActionResult> DeleteBlog(string slug)
+        {
+            if (!_blogRepository.BlogExists(slug)) return NotFound();
+            var blog = _context.Blogs.Where(b => b.Slug == slug).FirstOrDefault();
 
-        //    var blog =  _context.Blogs.Where(b => b.Slug == slug).FirstOrDefault();
-          
-        //    _context.Blog_Tag.RemoveRange(tags);
-        //    _context.Comments.RemoveRange(commentsToDelete);
+               _context.Blog_Tag.RemoveRange(blog.Blog_Tag);
+            if(_blogRepository.GetComment(slug) != null)
+               _context.Comments.RemoveRange(_blogRepository.GetComment(slug));
 
-        //    _context.Entry(blogToDelete).State = EntityState.Deleted;
-        //    _context.Blogs.Remove(blogToDelete);
-        //    _context.SaveChanges();
-        //    return NoContent();
-        //}
+            //    _context.Entry(blogToDelete).State = EntityState.Deleted;
+            _context.Blogs.Remove(blog);
+            _context.SaveChanges();
+            return NoContent();
+        }
 
     }
 }
