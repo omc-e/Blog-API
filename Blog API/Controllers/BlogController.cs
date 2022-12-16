@@ -138,7 +138,7 @@ namespace Blog_API.Controllers
                 return StatusCode(500, ModelState);
             }
             
-            return Ok(blog);
+            return Ok(comment);
         }
 
         [HttpPost]

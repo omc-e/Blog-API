@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+    backend:
+  
+
+services:
+  blogapidb:
+    container_name: api-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 8001:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=password@12345#
+    networks:
+        - backend
+       
+  blogapi:
+    container_name: blog-api
+    image: ${DOCKER_REGISTRY-}blogapi
+    build:
+      context: .
+      dockerfile: Blog API/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8002:80
+    environment:
+      - DB_HOST=api-db
+      - DB_NAME=BlogApiDB
+      - DB_SA_PASSWORD=password@12345#

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Blog_API;
 using Blog_API.Data;
 using Blog_API.Interfaces;
@@ -18,9 +19,14 @@ builder.Services.AddScoped<ITagRepository, TagRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName}; User=sa; Password={dbPassword}";
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(connectionString);
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -49,10 +55,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
+SeedData(app);
 app.Run();
+void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient<IBlogRepository, BlogRepository>();
+    services.AddTransient<IMapper, Mapper>();
+    services.AddTransient<DataContext>();
+}

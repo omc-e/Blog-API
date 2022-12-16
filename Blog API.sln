@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog API", "Blog API\Blog API.csproj", "{5CF91A75-5939-4EEA-897E-6EC22465E2D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog API", "Blog API\Blog API.csproj", "{5CF91A75-5939-4EEA-897E-6EC22465E2D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogApi.UnitTests", "BlogApi.UnitTests\BlogApi.UnitTests.csproj", "{67857679-AF3A-4529-9CA6-85DED781D737}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6C8572AF-58CB-419E-9B3E-F92E9A8B0D4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5CF91A75-5939-4EEA-897E-6EC22465E2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CF91A75-5939-4EEA-897E-6EC22465E2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CF91A75-5939-4EEA-897E-6EC22465E2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67857679-AF3A-4529-9CA6-85DED781D737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67857679-AF3A-4529-9CA6-85DED781D737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67857679-AF3A-4529-9CA6-85DED781D737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67857679-AF3A-4529-9CA6-85DED781D737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C8572AF-58CB-419E-9B3E-F92E9A8B0D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8572AF-58CB-419E-9B3E-F92E9A8B0D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8572AF-58CB-419E-9B3E-F92E9A8B0D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8572AF-58CB-419E-9B3E-F92E9A8B0D4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

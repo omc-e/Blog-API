@@ -1,5 +1,7 @@
 ﻿using Blog_API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Hosting;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Emit;
@@ -10,7 +12,20 @@ namespace Blog_API.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            
+            try
+            {
+                var databaseCreator = Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator;
+                if(databaseCreator != null)
+                {
+                    if (!databaseCreator.CanConnect()) databaseCreator.Create();
+                    if (!databaseCreator.HasTables()) databaseCreator.CreateTables();
+                }
+
+            }
+            catch
+            {
+                
+            }
         }
 
         public DbSet<BlogModel> Blogs { get; set; }
